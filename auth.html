@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trader Access | ChronosMatch Zero-Copy HFT Engine</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="auth-body">
+
+    <!-- Top Navigation Bar -->
+    <nav class="auth-nav">
+        <div class="logo">
+            <span class="logo-icon">⚡</span>
+            <span class="logo-title">ChronosMatch</span>
+            <span class="logo-badge">ZERO-COPY HFT</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 16px;">
+            <div class="system-status" id="systemStatusBadge">
+                <span class="status-dot"></span>
+                <span id="engineStatusText">ENGINE ONLINE</span>
+            </div>
+            <a href="index.html" class="auth-nav-link">Terminal Dashboard &rarr;</a>
+        </div>
+    </nav>
+
+    <!-- Pure CSS Ambient Glowing Elements -->
+    <div class="auth-ambient-glow glow-blue"></div>
+    <div class="auth-ambient-glow glow-green"></div>
+    <div class="auth-ambient-glow glow-purple"></div>
+
+    <!-- Main Auth Card Container -->
+    <main class="auth-main-wrap">
+        <div class="auth-card">
+            <!-- Card Header -->
+            <div class="auth-card-header">
+                <div class="auth-logo-badge">SIMULATED TRADING TERMINAL</div>
+                <h2 id="authCardTitle">Trader Terminal Access</h2>
+                <p id="authCardSub">Price-time order matching with sub-millisecond execution</p>
+            </div>
+
+            <!-- Segmented Switcher Tabs -->
+            <div class="auth-tab-group">
+                <button type="button" class="auth-tab-btn active" id="tabLoginBtn">Sign In</button>
+                <button type="button" class="auth-tab-btn" id="tabSignupBtn">Create Account</button>
+            </div>
+
+            <!-- Card Body -->
+            <div class="auth-card-body">
+                <!-- Alert Box for feedback -->
+                <div id="authAlert" class="alert-box hidden" style="margin-bottom: 16px;"></div>
+
+                <!-- ==================== LOGIN FORM ==================== -->
+                <form id="formLogin" class="order-form">
+                    <div class="form-group">
+                        <label for="loginUsername">Username or Registered Email</label>
+                        <input type="text" id="loginUsername" class="input-box font-mono" placeholder="e.g. TRADER_1 or user@email.com" required autocomplete="username">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <div class="input-with-icon">
+                            <input type="password" id="loginPassword" class="input-box font-mono" placeholder="Enter your password" required autocomplete="current-password">
+                            <button type="button" class="toggle-pwd-btn" id="toggleLoginPwd" title="Show / Hide Password">👁️</button>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; font-size: 11px; color: var(--text-secondary);">
+                        <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
+                            <input type="checkbox" id="chkRememberMe" checked>
+                            <span>Remember session</span>
+                        </label>
+                        <span style="color: var(--text-muted); cursor: help;" title="Simulated environment - default demo passwords available below">Help / Demos ?</span>
+                    </div>
+
+                    <button type="submit" id="btnLoginSubmit" class="btn btn-buy btn-block" style="padding: 10px 14px; font-size: 13px;">
+                        SIGN IN TO TRADING ENGINE
+                    </button>
+
+                    <!-- Fast 1-Click Demo Logins -->
+                    <div class="demo-divider">OR INSTANT DEMO EVALUATION</div>
+                    <div class="demo-pills-wrap">
+                        <button type="button" class="btn-demo-pill" onclick="quickFillDemo('TRADER_1', 'demo123')">
+                            <span class="demo-title">TRADER_1</span>
+                            <span class="demo-sub">₹1,00,000 Portfolio</span>
+                        </button>
+                        <button type="button" class="btn-demo-pill" onclick="quickFillDemo('TRADER_2', 'demo123')">
+                            <span class="demo-title">TRADER_2</span>
+                            <span class="demo-sub">₹1,00,000 Portfolio</span>
+                        </button>
+                        <button type="button" class="btn-demo-pill" onclick="quickFillDemo('MM_ALPHA', 'demo123')">
+                            <span class="demo-title">MM_ALPHA</span>
+                            <span class="demo-sub">Market Maker Flow</span>
+                        </button>
+                        <button type="button" class="btn-demo-pill" onclick="quickFillDemo('ALGO_QUANT', 'demo123')">
+                            <span class="demo-title">ALGO_QUANT</span>
+                            <span class="demo-sub">Institutional Taker</span>
+                        </button>
+                    </div>
+                </form>
+
+                <!-- ==================== SIGN UP FORM ==================== -->
+                <form id="formSignup" class="order-form hidden">
+                    <div class="form-group">
+                        <label for="signupFullName">Full Name (Optional)</label>
+                        <input type="text" id="signupFullName" class="input-box" placeholder="e.g. Rahul Sharma" autocomplete="name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signupUsername">Trader ID / Username</label>
+                        <input type="text" id="signupUsername" class="input-box font-mono" placeholder="e.g. QUANT_TRADER" required minlength="3" maxlength="30" autocomplete="username">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signupEmail">Email Address</label>
+                        <input type="email" id="signupEmail" class="input-box font-mono" placeholder="e.g. trader@domain.com" required autocomplete="email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signupPassword">Password</label>
+                        <div class="input-with-icon">
+                            <input type="password" id="signupPassword" class="input-box font-mono" placeholder="Minimum 6 characters" required minlength="6" autocomplete="new-password">
+                            <button type="button" class="toggle-pwd-btn" id="toggleSignupPwd" title="Show / Hide Password">👁️</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signupInitialCash">Starting Simulated Capital (₹)</label>
+                        <input type="number" id="signupInitialCash" class="input-box font-mono" value="100000" min="0" step="5000" required>
+                        <div class="quick-cash-row">
+                            <button type="button" class="cash-pill" onclick="setCashPreset(50000)">₹50K</button>
+                            <button type="button" class="cash-pill active" onclick="setCashPreset(100000)">₹1L</button>
+                            <button type="button" class="cash-pill" onclick="setCashPreset(500000)">₹5L</button>
+                            <button type="button" class="cash-pill" onclick="setCashPreset(1000000)">₹10L</button>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="btnSignupSubmit" class="btn btn-buy btn-block" style="padding: 10px 14px; font-size: 13px; margin-top: 18px;">
+                        CREATE SIMULATED TRADER ACCOUNT
+                    </button>
+                </form>
+            </div>
+
+            <!-- Card Footer -->
+            <div class="auth-footer-bar">
+                <span>⚡ Simulated High-Frequency Trading &bull; Zero Real Capital at Risk</span>
+            </div>
+        </div>
+    </main>
+
+    <!-- Client Script -->
+    <script src="auth.js"></script>
+</body>
+
+</html>
